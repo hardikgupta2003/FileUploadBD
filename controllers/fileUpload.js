@@ -42,9 +42,9 @@ async function uploadFileToCloudinary(file, folder, quality) {
     const options = {folder};
     console.log("temp file path", file.tempFilePath);
 
-    if(quality) {
-        options.quality = quality;
-    }
+    if (quality) {
+        options.transformation = [{ quality: quality }];
+      }
 
     options.resource_type = "auto";
     return await cloudinary.uploader.upload(file.tempFilePath, options);
@@ -179,7 +179,7 @@ exports.imageSizeReducer = async (req,res) => {
         //file format supported hai
         console.log("Uploading to Codehelp");
         //TODO: height attribute-> COMPRESS
-        const response = await uploadFileToCloudinary(file, "Codehelp", 90);
+        const response = await uploadFileToCloudinary(file, "personal", 50);
         console.log(response);
 
         //db me entry save krni h
